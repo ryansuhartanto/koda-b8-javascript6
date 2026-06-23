@@ -1,19 +1,4 @@
-const URL = "https://jsonplaceholder.typicode.com/users";
-
-function getData() {
-	return fetch(URL)
-		.then((response) => response.text())
-		.catch((error) => console.error(error));
-}
-
-async function getDataAsync() {
-	try {
-		const response = await fetch(URL);
-		return await response.text();
-	} catch (error) {
-		console.error(error);
-	}
-}
+const { getData, getDataAsync } = require("./utils");
 
 function processEmail(email) {
 	const lowerCaseMap = {
@@ -65,5 +50,7 @@ function processData(data) {
 	console.log(emails);
 }
 
-getData().then(processData);
-processData(await getDataAsync());
+(async function () {
+	getData().then(processData);
+	processData(await getDataAsync());
+})();
